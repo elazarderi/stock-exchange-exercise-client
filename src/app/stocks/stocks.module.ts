@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { StocksRoutingModule } from './stocks-routing.module';
 import { StocksListComponent } from './stocks-list/stocks-list.component';
+import { StockComponent } from './stock/stock.component';
 
 
 @NgModule({
   declarations: [
-    StocksListComponent
+    StocksListComponent,
+    StockComponent
   ],
   imports: [
     CommonModule,
