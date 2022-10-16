@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IShare } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-stock',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stock.component.scss']
 })
 export class StockComponent implements OnInit {
+
+  @Input('share') share: IShare;
 
   constructor() { }
 

@@ -1,13 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, retry, switchMap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { IShare } from '../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  apiURL = 'http://localhost:3000';
+
+  private sharesSource = new BehaviorSubject<IShare[] | null>(null);
+  shares$: Observable<IShare[] | null> = this.sharesSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -17,9 +20,13 @@ export class HttpService {
     })
   };
 
-  getShares(): Observable<IShare[]> {
-    return this.http.get<IShare[]>(this.apiURL + '/shares/all')
-      .pipe(retry(1), catchError(this.handleError))
+  getShares(): Observable<IShare[]|null> {
+    this.sharesSource.next([])
+    return this.http.get<IShare[]|null>(environment.apiURL + '/shares/all')
+      .pipe(retry(1), catchError(this.handleError), switchMap(data => {
+        this.sharesSource.next(data)
+        return this.shares$;
+      }))
   }
 
   // Error handling
