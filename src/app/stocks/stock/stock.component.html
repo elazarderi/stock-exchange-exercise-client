@@ -1,7 +1,10 @@
 <div class="container">
-    <div class="row">
-        <p>{{share.name}}</p>
-        <p>מחיר: {{share.currentPrice}}</p>
+    <div>
+        <h2>{{share.name}}</h2>
+        <p>מחיר: ${{share.currentPrice}}</p>
         <p>כמות: {{share.amount}}</p>
+    </div>
+    <div class="buttons-section">
+        <button class="share-details-button" (click)="shareDetails()">צפה בפרטי המניה</button>
     </div>
 </div>

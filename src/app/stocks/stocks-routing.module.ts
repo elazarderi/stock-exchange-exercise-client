@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { StocksListComponent } from './stocks-list/stocks-list.component';
 
 const routes: Routes = [
   {
-    path: '', component: StocksListComponent
+    path: '', component: StocksListComponent, pathMatch: 'full'
+  },
+  {
+    path: 'details/:share', component: StockDetailsComponent, pathMatch: 'full'
   }
 ];
 
