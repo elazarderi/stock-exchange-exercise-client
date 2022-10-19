@@ -24,6 +24,7 @@ export class HttpService {
     this.sharesSource.next([])
     return this.http.get<IShare[]|null>(environment.apiURL + '/shares/all')
       .pipe(retry(1), catchError(this.handleError), switchMap(data => {
+        console.log(data);
         this.sharesSource.next(data)
         return this.shares$;
       }))
