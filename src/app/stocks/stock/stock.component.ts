@@ -17,6 +17,6 @@ export class StockComponent implements OnInit {
   }
 
   shareDetails() {
-    this.router.navigate(['details', this.share])
+    this.router.navigate(['stocks/details'], { queryParams: this.share });
   }
 }

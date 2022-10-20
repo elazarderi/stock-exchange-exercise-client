@@ -14,7 +14,7 @@ export class StockDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => console.log( params['share']))
+    this.share = this.route.snapshot.queryParams as IShare;
   }
 
 }

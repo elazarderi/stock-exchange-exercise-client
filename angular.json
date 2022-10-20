@@ -30,7 +30,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "assets/fonts/fonts.css"
+              "src/assets/fonts/fonts.css"
             ],
             "scripts": []
           },

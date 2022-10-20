@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '', component: StocksListComponent, pathMatch: 'full'
   },
   {
-    path: 'details/:share', component: StockDetailsComponent, pathMatch: 'full'
+    path: 'details', component: StockDetailsComponent
   }
 ];
 
