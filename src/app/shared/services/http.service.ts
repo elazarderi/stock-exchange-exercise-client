@@ -1,16 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, retry, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IShare } from '../types';
+import { IOffer, IShare } from '../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-
-  private sharesSource = new BehaviorSubject<IShare[] | null>(null);
-  shares$: Observable<IShare[] | null> = this.sharesSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -20,14 +17,12 @@ export class HttpService {
     })
   };
 
-  getShares(): Observable<IShare[]|null> {
-    this.sharesSource.next([])
-    return this.http.get<IShare[]|null>(environment.apiURL + '/shares/all')
-      .pipe(retry(1), catchError(this.handleError), switchMap(data => {
-        console.log(data);
-        this.sharesSource.next(data)
-        return this.shares$;
-      }))
+  getShares(): Observable<IShare[] | null> {
+    return this.http.get<IShare[] | null>(environment.apiURL + '/shares/all');
+  }
+
+  getShareOffers(shareId: number): Observable<IOffer[] | null> {
+    return this.http.get<IOffer[] | null>(environment.apiURL + `/offers/share/${shareId}`);
   }
 
   // Error handling
