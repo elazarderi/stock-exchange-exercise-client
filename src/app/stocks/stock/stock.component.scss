@@ -1,5 +1,6 @@
 .container {
-    border: 3px solid #CD7F32;
+    border: 5px solid #CD7F32;
+    background-color: whitesmoke;
     width: 50%;
     margin: auto;
     margin-bottom: 10%;
@@ -7,7 +8,11 @@
 }
 
 .share-section {
-    margin-bottom: 25%;
+    margin-bottom: 20%;
+}
+
+.buttons-section {
+    margin-bottom: 5%;
 }
 
 .share-details-button {

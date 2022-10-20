@@ -1,6 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 * {
-    box-sizing: border-box;
-    padding: 0;
-    font-family: 'hebbo', 'arial', sans-serif;
-  }
+  box-sizing: border-box;
+  padding: 0;
+  font-family: 'hebbo', 'arial', sans-serif;
+}
+
+body { 
+  position: relative;
+  background-image: url('assets/images/background.jpg');
+  background-size: cover;
+}
+
+.screen-title {
+  color: #4c5eaf;
+}
