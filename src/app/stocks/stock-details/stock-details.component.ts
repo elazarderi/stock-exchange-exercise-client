@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IOffer, IShare } from 'src/app/shared/types';
+import { IDeal, IOffer, IShare } from 'src/app/shared/types';
 import { StocksService } from '../stocks.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { StocksService } from '../stocks.service';
 export class StockDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['date', 'type', 'offeredType', 'offeredName'];
-  dataSource: IOffer[] = [];
+  offersDataSource: IOffer[] = [];
+  dealsDataSource: IDeal[] = [];
 
   share: IShare;
   isOffersLoading: boolean = false;
@@ -22,14 +23,24 @@ export class StockDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.share = this.route.snapshot.queryParams as IShare;
     this.getShareOffers(this.share.id);
+    this.getLastDeals(this.share.id);
   }
 
   getShareOffers(id: number) {
     this.isOffersLoading = true;
     this.stocksService.getShareOffers(id).subscribe(offers => {
-      this.dataSource = offers;
+      this.offersDataSource = offers;
       this.isOffersLoading = false;
-      console.log(this.dataSource);
+      console.log(this.offersDataSource);
+    });
+  }
+
+  getLastDeals(id: number) {
+    this.isOffersLoading = true;
+    this.stocksService.getLastDeals(id).subscribe(deals => {
+      this.dealsDataSource = deals;
+      this.isOffersLoading = false;
+      console.log(this.dealsDataSource);
     });
   }
 

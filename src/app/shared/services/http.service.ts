@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, retry, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IOffer, IShare } from '../types';
+import { IDeal, IOffer, IShare } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,10 @@ export class HttpService {
 
   getShareOffers(shareId: number): Observable<IOffer[] | null> {
     return this.http.get<IOffer[] | null>(environment.apiURL + `/offers/share/${shareId}`);
+  }
+
+  getShateLastDeals(shareId: number): Observable<IDeal[] | null> {
+    return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/share/${shareId}`);
   }
 
   // Error handling

@@ -12,7 +12,7 @@
     </div>
     <div class="table-container">
         <p class="table-title">הצעות פתוחות</p>
-        <table *ngIf="dataSource" mat-table [dataSource]="dataSource" class="mat-elevation-z8" dir="rtl"
+        <table *ngIf="offersDataSource" mat-table [dataSource]="offersDataSource" class="mat-elevation-z8" dir="rtl"
             [loading]="isOffersLoading">
 
             <!--- Note that these columns can be defined in any order.
@@ -42,7 +42,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <div *ngIf="!dataSource.length && !isOffersLoading">
+        <div *ngIf="!offersDataSource.length && !isOffersLoading">
             <p class="records-not-found">!לא נמצאו הצעות פתוחות למניה זו</p>
         </div>
     </div>
