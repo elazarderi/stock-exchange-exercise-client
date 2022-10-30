@@ -6,7 +6,7 @@ import { StocksListComponent } from './stocks-list/stocks-list.component';
 import { StockComponent } from './stock/stock.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { CoreModule } from '../core/core.module';
-
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { CoreModule } from '../core/core.module';
   imports: [
     CommonModule,
     StocksRoutingModule,
-    CoreModule
+    CoreModule,
+    MatTableModule
   ]
 })
 export class StocksModule { }

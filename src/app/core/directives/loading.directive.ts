@@ -1,6 +1,5 @@
 import {
-  Directive, Input, ComponentRef,
-  ElementRef, Renderer2, ViewContainerRef, ComponentFactoryResolver, OnInit, OnChanges, SimpleChanges
+  Directive, Input, ComponentRef, ElementRef, Renderer2, ViewContainerRef, OnInit, OnChanges, SimpleChanges
 } from '@angular/core';
 import { LoaderComponent } from '../components/loader/loader.component';
 
@@ -16,7 +15,6 @@ export class LoadingDirective implements OnInit, OnChanges {
   constructor(private el: ElementRef,
     private renderer: Renderer2,
     private viewContainerRef: ViewContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +34,7 @@ export class LoadingDirective implements OnInit, OnChanges {
   }
 
   createLoader() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(LoaderComponent);
-    this.componentRef = this.viewContainerRef.createComponent(componentFactory);
+    this.componentRef = this.viewContainerRef.createComponent(LoaderComponent);
     this.el.nativeElement.appendChild(this.loaderElement);
   }
 

@@ -9,10 +9,12 @@
 
 body { 
   position: relative;
-  background-image: url('assets/images/background.jpg');
+  background: url('assets/images/background.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .screen-title {
   color: $blue;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
