@@ -10,6 +10,8 @@
             <p>כמות: {{share.amount}}</p>
         </div>
     </div>
+
+    <!-- Open offers table -->
     <div class="table-container">
         <p class="table-title">הצעות פתוחות</p>
         <table *ngIf="offersDataSource" mat-table [dataSource]="offersDataSource" class="mat-elevation-z8" dir="rtl"
@@ -39,11 +41,62 @@
                     : share?.name}} </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-header-row *matHeaderRowDef="offersDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: offersDisplayedColumns;"></tr>
         </table>
         <div *ngIf="!offersDataSource.length && !isOffersLoading">
             <p class="records-not-found">!לא נמצאו הצעות פתוחות למניה זו</p>
+        </div>
+    </div>
+
+    <!-- Last deals table -->
+    <div class="table-container">
+        <p class="table-title">עסקאות אחרונות</p>
+        <table *ngIf="dealsDataSource" mat-table [dataSource]="dealsDataSource" class="mat-elevation-z8" dir="rtl"
+            [loading]="isDealsLoading">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>תאריך</th>
+                <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/YYYY'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sellerType">
+                <th mat-header-cell *matHeaderCellDef>סוג המוכר</th>
+                <td mat-cell *matCellDef="let element"> {{element.sellerOffer.offeredType == 'trader' ? 'סוחר' :
+                    'חברה'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sellerName">
+                <th mat-header-cell *matHeaderCellDef>שם המוכר</th>
+                <td mat-cell *matCellDef="let element"> {{element.sellerOffer.offeredType == 'trader' ? element.sellerOffer.offeredTrader?.name
+                    : share?.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="buyerType">
+                <th mat-header-cell *matHeaderCellDef>סוג הקונה</th>
+                <td mat-cell *matCellDef="let element"> {{element.buyerOffer.offeredType == 'trader' ? 'סוחר' :
+                    'חברה'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="buyerName">
+                <th mat-header-cell *matHeaderCellDef>שם הקונה</th>
+                <td mat-cell *matCellDef="let element"> {{element.buyerOffer.offeredType == 'trader' ? element.buyerOffer.offeredTrader?.name
+                    : share?.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>מחיר</th>
+                <td mat-cell *matCellDef="let element"> ${{element.price}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="dealsDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: dealsDisplayedColumns;"></tr>
+        </table>
+        <div *ngIf="!dealsDataSource.length && !isDealsLoading">
+            <p class="records-not-found">!לא נמצאו עסקאות שבוצעו במניה זו</p>
         </div>
     </div>
 </div>

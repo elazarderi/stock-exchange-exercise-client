@@ -10,12 +10,15 @@ import { StocksService } from '../stocks.service';
 })
 export class StockDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'type', 'offeredType', 'offeredName'];
+  offersDisplayedColumns: string[] = ['date', 'type', 'offeredType', 'offeredName'];
   offersDataSource: IOffer[] = [];
+  isOffersLoading: boolean = false;
+
+  dealsDisplayedColumns: string[] = ['date', 'sellerType', 'sellerName', 'buyerType', 'buyerName', 'price'];
   dealsDataSource: IDeal[] = [];
+  isDealsLoading: boolean = false;
 
   share: IShare;
-  isOffersLoading: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private stocksService: StocksService) { }
@@ -36,10 +39,10 @@ export class StockDetailsComponent implements OnInit {
   }
 
   getLastDeals(id: number) {
-    this.isOffersLoading = true;
+    this.isDealsLoading = true;
     this.stocksService.getLastDeals(id).subscribe(deals => {
       this.dealsDataSource = deals;
-      this.isOffersLoading = false;
+      this.isDealsLoading = false;
       console.log(this.dealsDataSource);
     });
   }
