@@ -17,9 +17,6 @@
         <table *ngIf="offersDataSource" mat-table [dataSource]="offersDataSource" class="mat-elevation-z8" dir="rtl"
             [loading]="isOffersLoading">
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef>תאריך</th>
                 <td mat-cell *matCellDef="let element"> {{element.requestDate | date:'dd/MM/YYYY'}} </td>
@@ -55,9 +52,6 @@
         <table *ngIf="dealsDataSource" mat-table [dataSource]="dealsDataSource" class="mat-elevation-z8" dir="rtl"
             [loading]="isDealsLoading">
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef>תאריך</th>
                 <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/YYYY'}} </td>
@@ -71,7 +65,8 @@
 
             <ng-container matColumnDef="sellerName">
                 <th mat-header-cell *matHeaderCellDef>שם המוכר</th>
-                <td mat-cell *matCellDef="let element"> {{element.sellerOffer.offeredType == 'trader' ? element.sellerOffer.offeredTrader?.name
+                <td mat-cell *matCellDef="let element"> {{element.sellerOffer.offeredType == 'trader' ?
+                    element.sellerOffer.offeredTrader?.name
                     : share?.name}} </td>
             </ng-container>
 
@@ -83,7 +78,8 @@
 
             <ng-container matColumnDef="buyerName">
                 <th mat-header-cell *matHeaderCellDef>שם הקונה</th>
-                <td mat-cell *matCellDef="let element"> {{element.buyerOffer.offeredType == 'trader' ? element.buyerOffer.offeredTrader?.name
+                <td mat-cell *matCellDef="let element"> {{element.buyerOffer.offeredType == 'trader' ?
+                    element.buyerOffer.offeredTrader?.name
                     : share?.name}} </td>
             </ng-container>
 
