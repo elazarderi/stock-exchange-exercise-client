@@ -10,10 +10,11 @@ import { StocksService } from '../stocks.service';
 })
 export class StockDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'type', 'offeredType','offeredName'];
+  displayedColumns: string[] = ['date', 'type', 'offeredType', 'offeredName'];
   dataSource: IOffer[] = [];
 
   share: IShare;
+  isOffersLoading: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private stocksService: StocksService) { }
@@ -24,8 +25,10 @@ export class StockDetailsComponent implements OnInit {
   }
 
   getShareOffers(id: number) {
+    this.isOffersLoading = true;
     this.stocksService.getShareOffers(id).subscribe(offers => {
       this.dataSource = offers;
+      this.isOffersLoading = false;
       console.log(this.dataSource);
     });
   }

@@ -2,6 +2,16 @@
     text-align: center;
 }
 
+.back {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 50px;
+    color: whitesmoke;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
 .container {
     text-align: center;
     border: 5px solid #CD7F32;
@@ -22,13 +32,25 @@
 }
 
 .table-title {
-    margin: 20px;
+    margin-top: 30px;
     text-align: center;
     font-size: 50px;
-    color: white;
+    color: whitesmoke;
     font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
 
 table {
     width: 100%;
+}
+
+.records-not-found {
+    text-align: center;
+    font-size: 25px;
+    color: whitesmoke;
+    font-weight: bold;
+    padding: 15px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }

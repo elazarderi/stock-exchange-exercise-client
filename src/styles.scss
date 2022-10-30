@@ -7,15 +7,27 @@
   font-family: 'hebbo', 'arial', sans-serif;
 }
 
-body { 
+body {
   position: relative;
   background: url('assets/images/background.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .screen-title {
-  color: $blue;
+  font-size: 40px;
+  color: whitesmoke;
+  padding: 15px;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

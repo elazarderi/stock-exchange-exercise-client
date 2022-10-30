@@ -16,10 +16,12 @@ export class StocksListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    
-    this.stocksService.getShares().subscribe(data => {
-      this.shares = data;
-      this.isLoading = false;
-    });
+
+    if (!this.shares.length) {
+      this.stocksService.getShares().subscribe(data => {
+        this.shares = data;
+        this.isLoading = false;
+      });
+    }
   }
 }
