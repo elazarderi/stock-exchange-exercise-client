@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/shared/services/http.service';
 import { IShare } from 'src/app/shared/types';
 import { StocksService } from '../stocks.service';
 
@@ -11,10 +10,16 @@ import { StocksService } from '../stocks.service';
 export class StocksListComponent implements OnInit {
 
   shares: IShare[] = [];
+  isLoading: boolean = false;
 
   constructor(private stocksService: StocksService) { }
 
   ngOnInit(): void {
-    this.stocksService.getShares().subscribe(data => this.shares = data);
+    this.isLoading = true;
+    
+    this.stocksService.getShares().subscribe(data => {
+      this.shares = data;
+      this.isLoading = false;
+    });
   }
 }

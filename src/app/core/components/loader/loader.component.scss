@@ -1,0 +1,16 @@
+@import "variables";
+
+.loader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 9px;
+    color: $blue;
+    font-size: 60px;
+}
+
+.loader-container > * {
+    margin: auto;
+}
