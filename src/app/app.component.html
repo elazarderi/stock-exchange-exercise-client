@@ -6,7 +6,7 @@
     <div class="nav-left">
         <a *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/log-in">התחברות</a>
         <a *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/sign-up">הרשמה</a>
-        <a (click)="logout()" *ngIf="this.authService.isLoggedIn">התנתק</a>
+        <a (click)="logout()" *ngIf="this.authService.isLoggedIn" routerLinkActive="active">התנתק</a>
     </div>
 </div>
 

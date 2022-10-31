@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/types/common-types/user.interface';
 import { AuthService } from '../../services/auth.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,8 @@ export class SignupComponent implements OnInit {
 
   constructor(public fb: FormBuilder,
     public authService: AuthService,
-    public router: Router) {
+    public router: Router,
+    private snackbarService: SnackbarService) {
     this.signupForm = this.fb.group({
       firstName: [''],
       lastName: [''],
@@ -26,14 +28,20 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() { }
-  
+
   registerUser() {
-    this.authService.signUp(this.signupForm.value).subscribe((user: IUser) => {
-      if (user) {
-        this.signupForm.reset();
-        this.router.navigate(['log-in']);
-      }
-    });
+    this.authService.signUp(this.signupForm.value).subscribe({
+        next: (user: IUser) => {
+          if (user) {
+            this.snackbarService.openSnackBar('המשתמש נוצר בהצלחה');
+            this.signupForm.reset();
+            this.router.navigate(['log-in']);
+          }
+        },
+        error: (error) => {
+          this.snackbarService.openSnackBar(error.error);
+        }
+      });
   }
 
 }

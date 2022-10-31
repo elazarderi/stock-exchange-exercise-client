@@ -11,28 +11,18 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+
   constructor(private http: HttpClient, public router: Router) { }
-  // Sign-up
-  signUp(user: IUser): Observable<any> {
-    let api = `${environment.apiURL}/signup`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
+
+  signUp(user: IUser): Observable<IUser | null> {
+    return this.http.post<IUser | null>(`${environment.apiURL}/signup`, user).pipe(catchError(this.handleError));
   }
 
-  // Sign-in
-  signIn(user: IUser) {
-    return this.http
-      .post<any>(`${environment.apiURL}/signin`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['user-profile/' + res.msg._id]);
-        });
-      });
+  signIn(user: IUser): Observable<IUser | null> {
+    return this.http.post<IUser | null>(`${environment.apiURL}/signin`, user).pipe(catchError(this.handleError));
   }
 
-  getToken() {
+  getToken(): string {
     return localStorage.getItem('access_token');
   }
 
@@ -48,7 +38,6 @@ export class AuthService {
     }
   }
 
-  // User profile
   getUserProfile(id: any): Observable<any> {
     let api = `${environment.apiURL}/user-profile/${id}`;
     return this.http.get(api, { headers: this.headers }).pipe(
@@ -58,8 +47,7 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
-  
-  // Error
+
   handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {
