@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-card-title>התחברות</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="signinForm" (ngSubmit)="loginUser()">
+            <p>
+                <mat-form-field class="rtl">
+                    <input type="userName" matInput class="form-control" formControlName="userName"
+                        placeholder="שם משתמש" required />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="rtl">
+                    <input type="password" matInput class="form-control" formControlName="password" placeholder="סיסמה"
+                        required />
+                </mat-form-field>
+            </p>
+            <p *ngIf="error" class="error">
+                {{ error }}
+            </p>
+            <div class="button">
+                <button type="submit" mat-button>התחבר</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
