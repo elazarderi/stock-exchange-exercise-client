@@ -12,7 +12,6 @@ import { SnackbarService } from '../../services/snackbar.service';
 export class SigninComponent implements OnInit {
 
   @Input() error: string | null;
-  currentUser = {};
   signinForm: FormGroup;
 
   constructor(public fb: FormBuilder,
@@ -33,8 +32,8 @@ export class SigninComponent implements OnInit {
         localStorage.setItem('access_token', res.token);
         this.snackbarService.openSnackBar('התחברת בהצלחה');
         this.authService.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['user-profile/' + res.msg._id]);
+          this.authService.currentUser = res;
+          this.router.navigate(['user-profile/']);
         });
       },
       error: (error) => {

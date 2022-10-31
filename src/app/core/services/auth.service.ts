@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+  public currentUser: Partial<IUser> = {};
 
   constructor(private http: HttpClient, public router: Router) { }
 
@@ -22,30 +23,31 @@ export class AuthService {
     return this.http.post<IUser | null>(`${environment.apiURL}/signin`, user).pipe(catchError(this.handleError));
   }
 
-  getToken(): string {
+  get token(): string {
     return localStorage.getItem('access_token');
   }
 
   get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
+    let authToken = this.token;
     return authToken !== null ? true : false;
   }
 
   doLogout() {
-    let removeToken = localStorage.removeItem('access_token');
+    const removeToken = localStorage.removeItem('access_token');
+    this.currentUser = {};
     if (removeToken == null) {
       this.router.navigate(['log-in']);
     }
   }
 
   getUserProfile(id: any): Observable<any> {
-    let api = `${environment.apiURL}/user-profile/${id}`;
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res) => {
-        return res || {};
-      }),
-      catchError(this.handleError)
-    );
+    return this.http.get(`${environment.apiURL}/user-profile`,
+      { headers: this.headers }).pipe(
+        map((res) => {
+          return res || {};
+        }),
+        catchError(this.handleError)
+      );
   }
 
   handleError(error: HttpErrorResponse) {

@@ -9,7 +9,9 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
   title = 'stock exchange';
   constructor(public authService: AuthService) { }
+  
   logout() {
+    console.log(this.authService.currentUser);
     this.authService.doLogout()
   }
 }

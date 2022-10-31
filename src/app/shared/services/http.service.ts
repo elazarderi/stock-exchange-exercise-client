@@ -25,7 +25,7 @@ export class HttpService {
     return this.http.get<IOffer[] | null>(environment.apiURL + `/offers/share/${shareId}`);
   }
 
-  getShateLastDeals(shareId: number): Observable<IDeal[] | null> {
+  getShareLastDeals(shareId: number): Observable<IDeal[] | null> {
     return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/share/${shareId}`);
   }
 

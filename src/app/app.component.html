@@ -7,6 +7,8 @@
         <a *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/log-in">התחברות</a>
         <a *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/sign-up">הרשמה</a>
         <a (click)="logout()" *ngIf="this.authService.isLoggedIn" routerLinkActive="active">התנתק</a>
+        <span class="logged-user-name"
+            *ngIf="this.authService.currentUser?.firstName">{{this.authService.currentUser.firstName}} שלום</span>
     </div>
 </div>
 

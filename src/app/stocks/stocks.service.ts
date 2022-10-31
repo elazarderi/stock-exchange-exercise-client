@@ -19,6 +19,6 @@ export class StocksService {
   }
 
   getLastDeals(shareId: number): Observable<IDeal[]> {
-    return this.httpService.getShateLastDeals(shareId);
+    return this.httpService.getShareLastDeals(shareId);
   }
 }
