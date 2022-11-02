@@ -1,7 +1,7 @@
 <div class="topnav">
     <div class="nav-right">
         <a routerLinkActive="active" routerLink="/stocks">מניות</a>
-        <a *ngIf="this.authService.isLoggedIn" routerLinkActive="active">פרופיל משתמש</a>
+        <a *ngIf="this.authService.isLoggedIn" routerLinkActive="active" routerLink="/user-profile">פרופיל משתמש</a>
     </div>
     <div class="nav-left">
         <a *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/log-in">התחברות</a>

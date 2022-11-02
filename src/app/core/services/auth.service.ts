@@ -29,7 +29,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     let authToken = this.token;
-    return authToken !== null ? true : false;
+    return authToken !== null && this.currentUser ? true : false;
   }
 
   doLogout() {
