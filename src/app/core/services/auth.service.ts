@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/types/common-types/user.interface';
 import { environment } from 'src/environments/environment';
+import { isEmptyObject } from 'src/app/shared/util';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     let authToken = this.token;
-    return authToken !== null && this.currentUser ? true : false;
+    return authToken !== null && !isEmptyObject(this.currentUser) ? true : false;
   }
 
   doLogout() {

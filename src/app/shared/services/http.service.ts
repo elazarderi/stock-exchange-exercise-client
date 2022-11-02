@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IDeal, IOffer, IShare } from '../types';
+import { IDeal, IOffer, IShare, TOfferType } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,10 @@ export class HttpService {
 
   getTraderLastDeals(traderId: number): Observable<IDeal[] | null> {
     return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/trader/${traderId}`);
+  }
+
+  makeOffer(traderId: number, shareId: number, type: TOfferType) {
+    return this.http.put(environment.apiURL + `/shares/make-offer`, { traderId, shareId, type });
   }
 
   // Error handling

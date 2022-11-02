@@ -1,3 +1,5 @@
+@import 'variables';
+
 .back {
     cursor: pointer;
     position: absolute;
@@ -15,6 +17,32 @@
     width: 25%;
     margin: auto;
     border-radius: 10px;
+}
+
+.buttons-section {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons-space {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.share-details-button {
+    cursor: pointer;
+    background-color: $blue;
+    border: none;
+    color: whitesmoke;
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .share-section {

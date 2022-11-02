@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../shared/services/http.service';
-import { IDeal, IOffer, IShare } from '../shared/types';
+import { IDeal, IOffer, IShare, TOfferType } from '../shared/types';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,9 @@ export class StocksService {
 
   getTraderLastDeals(traderId: number): Observable<IDeal[]> {
     return this.httpService.getTraderLastDeals(traderId);
+  }
+
+  makeOffer(traderId: number, shareId: number, type: TOfferType) {
+    return this.httpService.makeOffer(traderId, shareId, type);
   }
 }

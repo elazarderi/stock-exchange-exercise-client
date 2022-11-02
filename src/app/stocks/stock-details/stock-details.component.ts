@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IDeal, IOffer, IShare } from 'src/app/shared/types';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { IDeal, IOffer, IShare, TOfferType } from 'src/app/shared/types';
 import { StocksService } from '../stocks.service';
 
 @Component({
@@ -21,12 +22,19 @@ export class StockDetailsComponent implements OnInit {
   share: IShare;
 
   constructor(private route: ActivatedRoute,
-    private stocksService: StocksService) { }
+    private stocksService: StocksService,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.share = this.route.snapshot.queryParams as IShare;
     this.getShareOffers(this.share.id);
     this.fetchLastDeals(this.share.id);
+  }
+
+  makeOffer(type: TOfferType) {
+    this.stocksService.makeOffer(this.authService.currentUser.traderId, this.share.id, type).subscribe(a => {
+      console.log(a)
+    })
   }
 
   getShareOffers(id: number) {
