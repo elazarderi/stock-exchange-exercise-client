@@ -26,7 +26,7 @@ export class StockDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.share = this.route.snapshot.queryParams as IShare;
     this.getShareOffers(this.share.id);
-    this.getLastDeals(this.share.id);
+    this.fetchLastDeals(this.share.id);
   }
 
   getShareOffers(id: number) {
@@ -38,9 +38,9 @@ export class StockDetailsComponent implements OnInit {
     });
   }
 
-  getLastDeals(id: number) {
+  fetchLastDeals(id: number) {
     this.isDealsLoading = true;
-    this.stocksService.getLastDeals(id).subscribe(deals => {
+    this.stocksService.getShareLastDeals(id).subscribe(deals => {
       this.dealsDataSource = deals;
       this.isDealsLoading = false;
       console.log(this.dealsDataSource);

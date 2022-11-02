@@ -5,3 +5,4 @@ export { ITrader } from './common-types/trader.interface';
 export { IOffer } from './common-types/offer.interface';
 export { IShare } from './common-types/share.interface';
 export { IDeal } from './common-types/deal.interface';
+export { IUser } from './common-types/user.interface';

@@ -18,7 +18,11 @@ export class StocksService {
     return this.httpService.getShareOffers(shareId);
   }
 
-  getLastDeals(shareId: number): Observable<IDeal[]> {
+  getShareLastDeals(shareId: number): Observable<IDeal[]> {
     return this.httpService.getShareLastDeals(shareId);
+  }
+
+  getTraderLastDeals(traderId: number): Observable<IDeal[]> {
+    return this.httpService.getTraderLastDeals(traderId);
   }
 }

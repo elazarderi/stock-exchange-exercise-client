@@ -29,6 +29,10 @@ export class HttpService {
     return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/share/${shareId}`);
   }
 
+  getTraderLastDeals(traderId: number): Observable<IDeal[] | null> {
+    return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/trader/${traderId}`);
+  }
+
   // Error handling
   handleError(error: any) {
     let errorMessage = '';
