@@ -26,7 +26,7 @@ export class StocksService {
     return this.httpService.getTraderLastDeals(traderId);
   }
 
-  makeOffer(traderId: number, shareId: number, type: TOfferType) {
-    return this.httpService.makeOffer(traderId, shareId, type);
+  makeOffer(traderId: number, shareId: number, type: TOfferType, price: number) {
+    return this.httpService.makeOffer(traderId, shareId, type, price);
   }
 }

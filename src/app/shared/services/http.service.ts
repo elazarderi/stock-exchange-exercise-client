@@ -33,8 +33,8 @@ export class HttpService {
     return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/trader/${traderId}`);
   }
 
-  makeOffer(traderId: number, shareId: number, type: TOfferType) {
-    return this.http.put(environment.apiURL + `/shares/make-offer`, { traderId, shareId, type });
+  makeOffer(traderId: number, shareId: number, type: TOfferType, price: number) {
+    return this.http.put(environment.apiURL + `/offers/make-offer`, { traderId, shareId, type, price });
   }
 
   // Error handling

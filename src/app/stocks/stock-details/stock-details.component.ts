@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { IDeal, IOffer, IShare, TOfferType } from 'src/app/shared/types';
 import { StocksService } from '../stocks.service';
 
@@ -23,7 +24,8 @@ export class StockDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private stocksService: StocksService,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.share = this.route.snapshot.queryParams as IShare;
@@ -32,9 +34,15 @@ export class StockDetailsComponent implements OnInit {
   }
 
   makeOffer(type: TOfferType) {
-    this.stocksService.makeOffer(this.authService.currentUser.traderId, this.share.id, type).subscribe(a => {
-      console.log(a)
-    })
+    this.stocksService.makeOffer(this.authService.currentUser.traderId, this.share.id, type, this.share.currentPrice)
+      .subscribe({
+        next: (res: any) => {
+          this.snackbarService.openSnackBar('ההצעה הוגשה בהצלחה!');
+        }, 
+        error: (error) => {
+          this.snackbarService.openSnackBar('אירעה שגיאה');
+        }
+      })
   }
 
   getShareOffers(id: number) {
