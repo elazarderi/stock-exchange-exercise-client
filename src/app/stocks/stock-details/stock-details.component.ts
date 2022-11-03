@@ -22,6 +22,7 @@ export class StockDetailsComponent implements OnInit {
   isDealsLoading: boolean = false;
 
   share: IShare;
+  isShareOwn: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private stocksService: StocksService,
@@ -32,18 +33,30 @@ export class StockDetailsComponent implements OnInit {
     this.share = this.route.snapshot.queryParams as IShare;
     this.fetchShareOffers(this.share.id);
     this.fetchLastDeals(this.share.id);
+    this.checkShareOwn();
+  }
+
+  checkShareOwn() {
+    this.stocksService.getTraderOwn(this.authService.currentUser.traderId, this.share.id)
+      .subscribe({
+        next: (res: any) => {
+          this.isShareOwn = res?.length;
+        }
+      });
   }
 
   makeOffer(type: TOfferType) {
     this.stocksService.makeOffer(this.authService.currentUser.traderId, this.share.id, type, this.share.currentPrice)
       .subscribe({
         next: (res: any) => {
+          this.fetchShareOffers(this.share.id);
+          this.fetchLastDeals(this.share.id);
           this.snackbarService.openSnackBar('ההצעה הוגשה בהצלחה!');
         },
         error: (error) => {
           this.snackbarService.openSnackBar('אירעה שגיאה');
         }
-      })
+      });
   }
 
   fetchShareOffers(id: number) {
@@ -65,7 +78,7 @@ export class StockDetailsComponent implements OnInit {
   }
 
   cancelOffer(offerId: number) {
-    this.stocksService.cancelOffer(offerId).subscribe((a:any) => {
+    this.stocksService.cancelOffer(offerId).subscribe((a: any) => {
       this.snackbarService.openSnackBar('ההצעה בוטלה בהצלחה!');
       this.fetchShareOffers(this.share.id);
     });

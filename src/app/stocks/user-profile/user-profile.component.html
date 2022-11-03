@@ -2,7 +2,12 @@
     <div class="heading-shares-section">
         <p class="screen-title">פרופיל משתמש</p>
     </div>
-
+    <div class="container">
+        <div class="share-section">
+            <h2>{{trader.name}}</h2>
+            <p>כסף: ${{trader.money}}</p>
+        </div>
+    </div>
     <!-- Last deals table -->
     <div class="table-container">
         <p class="table-title">עסקאות אחרונות</p>
@@ -16,7 +21,8 @@
 
             <ng-container matColumnDef="share">
                 <th mat-header-cell *matHeaderCellDef>מניה</th>
-                <td mat-cell *matCellDef="let element"> {{element.buyerOffer ? element.buyerOffer?.share.name : element.sellerOffer?.share.name}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.buyerOffer ? element.buyerOffer?.share.name :
+                    element.sellerOffer?.share.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="action">

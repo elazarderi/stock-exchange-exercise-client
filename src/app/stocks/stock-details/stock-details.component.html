@@ -12,7 +12,7 @@
     </div>
     <div *ngIf="this.authService.isLoggedIn" class="buttons-section">
         <div class="buttons-space">
-            <button class="share-details-button" (click)="makeOffer('sell')">הגש הצעה למכירה</button>
+            <button *ngIf="isShareOwn" class="share-details-button" (click)="makeOffer('sell')">הגש הצעה למכירה</button>
             <button class="share-details-button" (click)="makeOffer('buy')">הגש הצעה לקניה</button>
         </div>
     </div>
