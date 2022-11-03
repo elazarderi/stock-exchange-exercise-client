@@ -51,6 +51,7 @@ export class StockDetailsComponent implements OnInit {
         next: (res: any) => {
           this.fetchShareOffers(this.share.id);
           this.fetchLastDeals(this.share.id);
+          this.checkShareOwn();
           this.snackbarService.openSnackBar('ההצעה הוגשה בהצלחה!');
         },
         error: (error) => {

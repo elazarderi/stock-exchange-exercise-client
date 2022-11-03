@@ -48,7 +48,8 @@
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element" class="align-left">
                     <button class="share-details-button"
-                        *ngIf="element.offeredTraderId == authService.currentUser.traderId" (click)="cancelOffer(element.id)">בטל הצעה</button>
+                        *ngIf="authService.currentUser.traderId &&(element.offeredTraderId == authService.currentUser.traderId)"
+                        (click)="cancelOffer(element.id)">בטל הצעה</button>
                 </td>
             </ng-container>
 
