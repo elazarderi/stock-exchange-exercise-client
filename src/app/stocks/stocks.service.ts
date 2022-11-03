@@ -26,6 +26,10 @@ export class StocksService {
     return this.httpService.getTraderLastDeals(traderId);
   }
 
+  getAllTraders(): Observable<ITrader[]> {
+    return this.httpService.getAllTraders();
+  }
+
   getTrader(traderId: number): Observable<ITrader> {
     return this.httpService.getTrader(traderId);
   }

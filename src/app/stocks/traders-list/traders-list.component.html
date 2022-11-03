@@ -1,0 +1,10 @@
+<div [loading]="isLoading">
+    <div class="heading-shares-section">
+        <p class="screen-title">סוחרים</p>
+    </div>
+    <div class="list">
+        <div class="container" *ngFor="let trader of traders">
+            <app-trader [trader]="trader"></app-trader>
+        </div>
+    </div>
+</div>

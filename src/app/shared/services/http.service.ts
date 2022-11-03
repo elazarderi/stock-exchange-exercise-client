@@ -33,6 +33,10 @@ export class HttpService {
     return this.http.get<IDeal[] | null>(environment.apiURL + `/deals/trader/${traderId}`);
   }
 
+  getAllTraders(): Observable<ITrader[]> {
+    return this.http.get<ITrader[] | null>(environment.apiURL + `/traders/all`);
+  }
+
   getTrader(traderId: number): Observable<ITrader | null> {
     return this.http.get<ITrader | null>(environment.apiURL + `/traders/${traderId}`);
   }
