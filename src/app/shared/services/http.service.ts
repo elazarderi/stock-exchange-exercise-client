@@ -37,6 +37,10 @@ export class HttpService {
     return this.http.put(environment.apiURL + `/offers/make-offer`, { traderId, shareId, type, price });
   }
 
+  deleteOffer(id: number): Observable<any> {
+    return this.http.delete(environment.apiURL + `/offers/delete/${id}`);
+  }
+
   // Error handling
   handleError(error: any) {
     let errorMessage = '';

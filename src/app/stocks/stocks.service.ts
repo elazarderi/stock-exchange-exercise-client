@@ -29,4 +29,8 @@ export class StocksService {
   makeOffer(traderId: number, shareId: number, type: TOfferType, price: number) {
     return this.httpService.makeOffer(traderId, shareId, type, price);
   }
+  
+  cancelOffer(offerId: number): Observable<any> {
+    return this.httpService.deleteOffer(offerId);
+  }
 }

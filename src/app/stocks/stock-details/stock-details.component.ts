@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { IDeal, IOffer, IShare, TOfferType } from 'src/app/shared/types';
+import { removeItem } from 'src/app/shared/util';
 import { StocksService } from '../stocks.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { StocksService } from '../stocks.service';
 })
 export class StockDetailsComponent implements OnInit {
 
-  offersDisplayedColumns: string[] = ['date', 'type', 'offeredType', 'offeredName'];
+  offersDisplayedColumns: string[] = ['date', 'type', 'offeredType', 'offeredName', 'cancel'];
   offersDataSource: IOffer[] = [];
   isOffersLoading: boolean = false;
 
@@ -29,7 +30,7 @@ export class StockDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.share = this.route.snapshot.queryParams as IShare;
-    this.getShareOffers(this.share.id);
+    this.fetchShareOffers(this.share.id);
     this.fetchLastDeals(this.share.id);
   }
 
@@ -38,14 +39,14 @@ export class StockDetailsComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.snackbarService.openSnackBar('ההצעה הוגשה בהצלחה!');
-        }, 
+        },
         error: (error) => {
           this.snackbarService.openSnackBar('אירעה שגיאה');
         }
       })
   }
 
-  getShareOffers(id: number) {
+  fetchShareOffers(id: number) {
     this.isOffersLoading = true;
     this.stocksService.getShareOffers(id).subscribe(offers => {
       this.offersDataSource = offers;
@@ -63,4 +64,10 @@ export class StockDetailsComponent implements OnInit {
     });
   }
 
+  cancelOffer(offerId: number) {
+    this.stocksService.cancelOffer(offerId).subscribe((a:any) => {
+      this.snackbarService.openSnackBar('ההצעה בוטלה בהצלחה!');
+      this.fetchShareOffers(this.share.id);
+    });
+  }
 }
